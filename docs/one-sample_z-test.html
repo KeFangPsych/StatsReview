@@ -365,27 +365,38 @@ concepts of and relationships between hypothesis testing, effect size,
 and power analysis, using the one-sample z-test as a prime example.
 While the primary goal is to elucidate the idea behind hypothesis
 testing, this guide does try to carefully derive the math details behind
-the test in the hope that it helps clarification. DISCLAIMER: It’s
-important to mention that the one-sample z-test is rarely used due to
-its restrictive assumptions. As such, there are limited resources on the
-subject, compelling me to derive most of the formulas, particularly
-those related to power, on my own. This self-reliance might increase the
-likelihood of errors. If you detect any inaccuracies or inconsistencies,
-please don’t hesitate to let me know, and I’ll make the necessary
-updates. Happy learning!</p>
+the test in the hope that it helps clarification.
+<strong>DISCLAIMER:</strong> It’s important to mention that the
+one-sample z-test is rarely used due to its restrictive assumptions. As
+such, there are limited resources on the subject, compelling me to
+derive most of the formulas, particularly those related to power, on my
+own. This self-reliance might increase the likelihood of errors. If you
+detect any inaccuracies or inconsistencies, please don’t hesitate to let
+me know, and I’ll make the necessary updates. Happy learning! ;)</p>
 </div>
 <div id="single-sample-z-test" class="section level2">
 <h2>Single sample z test</h2>
 <div id="i.-the-data-generating-process" class="section level3">
 <h3><strong>I. The Data Generating Process</strong></h3>
 <p>In a single sample z-test, our data generating process (DGP) assumes
-that our observations of a random variable x are independently drawn
-from one identical distribution (i.i.d.) with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>.</p>
+that our observations of a random variable <span class="math inline">\(X\)</span> are independently drawn from one
+identical distribution (i.i.d.) with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>.</p>
+<p><strong>Important Notation:</strong></p>
+<ul>
+<li><p>Here we use the capital <span class="math inline">\(\bar{X}\)</span> to denote the sample mean to
+refer it as a random variable. And the <span class="math inline">\(X_i\)</span> refer to each element in a sample
+also as a random variable.</p></li>
+<li><p>Later, when we have an actual observed sample, we would use the
+lower case letter <span class="math inline">\(x_i\)</span> to denote
+each observation/realization of the random variable <span class="math inline">\(X_i\)</span> and calculate the observed sample
+mean <span class="math inline">\(\bar{x}\)</span> and treat it as an
+realization of our sample mean <span class="math inline">\(\bar{X}\)</span>.</p></li>
+</ul>
 <p>Thus, the expectation of the sample mean should be:</p>
 <p><span class="math display">\[
 \begin{align*}
-E(\bar{x}) =&amp; E(\frac{1}{n} \cdot \sum^n_i(x_i)) \\
-=&amp; \frac{1}{n} \cdot \sum^n_iE(x_i)\\
+E(\bar{X}) =&amp; E(\frac{1}{n} \cdot \sum^n_i(X_i)) \\
+=&amp; \frac{1}{n} \cdot \sum^n_iE(X_i)\\
 =&amp;\frac{1}{n}\cdot n \cdot \mu\\
 =&amp; \mu
 \end{align*}
@@ -393,43 +404,46 @@ E(\bar{x}) =&amp; E(\frac{1}{n} \cdot \sum^n_i(x_i)) \\
 <p>and the variance of the sample mean would be:</p>
 <p><span class="math display">\[
 \begin{align*}
-Var(\bar{x}) =&amp; Var(\frac{1}{n} \cdot \sum^n_i(x_i))\\
-=&amp; \frac{1}{n^2} \cdot \sum^n_i Var(x_i)\\
+Var(\bar{X}) =&amp; Var(\frac{1}{n} \cdot \sum^n_i(X_i))\\
+=&amp; \frac{1}{n^2} \cdot \sum^n_i Var(X_i)\\
 =&amp;\frac{1}{n^2} \cdot n \cdot \sigma^2\\
 =&amp; \frac{\sigma^2}{n}\\[2ex]
-*\text{Note: } &amp; Var(x_1 +x_2) = Var(x_1) + Var(x_2) + Cov(x_1,
-x_2)\\
-&amp;\text{As the samples are drawn individually, } Cov(x_1, x_2) =0, \\
-&amp;Var(x_1 +x_2) = Var(x_1) + Var(x_2)\\
+*\text{Note: } &amp; Var(X_1 +X_2) = Var(X_1) + Var(X_2) + Cov(X_1,
+X_2)\\
+&amp;\text{As the samples are drawn individually, } Cov(X_1, X_2) =0, \\
+&amp;Var(X_1 +X_2) = Var(X_1) + Var(X_2)\\
 \end{align*}
 \]</span></p>
 <p>More importantly, according to The Central Limit Theorem (CLT), even
 we did not specify the original distribution of <span class="math inline">\(x\)</span>, if the original distributions of <span class="math inline">\(x\)</span> have finite variances, as n become
 sufficiently large (rule of thumb: n &gt;30), the distribution of <span class="math inline">\(\bar{x}\)</span> become a normal distribution:</p>
-<p><span class="math display">\[\bar{x} \sim N(\mu,
+<p><span class="math display">\[\bar{X} \sim N(\mu,
 \frac{\sigma^2}{n})\]</span></p>
 <p>Given the nature of the normal distribution, we know the probability
-density function of <span class="math inline">\(\bar{x}\)</span> would
+density function of <span class="math inline">\(\bar{X}\)</span> would
 be</p>
-<p><span class="math display">\[f_{pdf}(\bar{x}|\mu, \sigma, n) =
+<p><span class="math display">\[f_{pdf}(\bar{X}|\mu, \sigma, n) =
 \frac{1}{\left(\frac{\sigma}{\sqrt{n}}\right)\sqrt{2\pi}} \cdot
-\exp\left[-\frac{(\bar{x}-\mu)^2}{2 \cdot
+\exp\left[-\frac{(\bar{X}-\mu)^2}{2 \cdot
 \left(\frac{\sigma^2}{n}\right)}\right]\]</span></p>
 <p>This can be tedious to calculate so we could standardize the normal
 distribution to a standard normal distribution (<span class="math inline">\(N(0, 1)\)</span>).</p>
 <p><span class="math display">\[
-z = (\frac{\bar{x} - \mu}{\sigma/\sqrt{n}}) = (\frac{\sqrt{n} \cdot
-(\bar{x} - \mu)}{\sigma})\sim N(0, 1)\\
+Z = (\frac{\bar{X} - \mu}{\sigma/\sqrt{n}}) = (\frac{\sqrt{n} \cdot
+(\bar{X} - \mu)}{\sigma})\sim N(0, 1)\\
 \]</span></p>
-<p>Also we could get the theoretical probability of getting z between an
+<p><strong>Important Notation:</strong> Similar to <span class="math inline">\(\bar{X}\)</span> and <span class="math inline">\(\bar{x}\)</span>, we use <span class="math inline">\(Z\)</span> to refer to the random variable and
+<span class="math inline">\(z\)</span> to refer to the observation from
+a fixed sample.</p>
+<p>Also we could get the theoretical probability of getting Z between an
 interval from the distribution by</p>
 <p><span class="math display">\[
-Pr(z_{min} &lt; z &lt; z_{max}) = \Phi(z_{max}) - \Phi(z_{min})\\[2ex]
-\text{where } \Phi(k) = \int^k_{-\infty} f_{pdf}(z|\mu, \sigma,n)\
-dz\\[2ex]
-f_{pdf}(z|\mu, \sigma,n) = \frac{1}{\sqrt{2\pi}} \cdot
-exp(-\frac{1}{2}z^2)\\[2ex]
-z|\mu, \sigma,n = \frac{\sqrt{n} \cdot (\bar{x} - \mu)}{\sigma}
+Pr(z_{min} &lt; Z &lt; z_{max}) = \Phi(z_{max}) - \Phi(z_{min})\\[2ex]
+\text{where } \Phi(k) = \int^k_{-\infty} f_{pdf}(Z|\mu, \sigma,n)\
+dZ\\[2ex]
+f_{pdf}(Z|\mu, \sigma,n) = \frac{1}{\sqrt{2\pi}} \cdot
+exp(-\frac{1}{2}Z^2)\\[2ex]
+Z|\mu, \sigma,n = \frac{\sqrt{n} \cdot (\bar{Z} - \mu)}{\sigma}
 \]</span></p>
 </div>
 <div id="ii.-the-hypothesis-testing" class="section level3">
@@ -442,13 +456,14 @@ Hypothesis</strong></h4>
 distribution (a very unrealistic assumption, but let’s stick with it for
 now)</p>
 <p>Given a sample, we could also know the sample size n, the observed
-sample mean <span class="math inline">\(\hat{\bar{x}}\)</span> (we use a
-hat so it don’t get confused as we view the sample mean <span class="math inline">\(\bar{x}\)</span> as a random variable in our
+sample mean <span class="math inline">\(\bar{x}\)</span> (remember we
+use lower case so it don’t get confused as we view the sample mean <span class="math inline">\(\bar{X}\)</span> as a random variable in our
 DGP).</p>
 <p>The aim of our hypothesis testing is then, given our knowledge about
-the <span class="math inline">\(\sigma\)</span>, n and the <span class="math inline">\(\hat{\bar{x}}\)</span>, we can test hypothesis
-about our sample mean <span class="math inline">\(\mu\)</span>.
-Specifically, the null hypothesis (<span class="math inline">\(H_0\)</span>) stating that,</p>
+the <span class="math inline">\(\sigma\)</span>, n and the <span class="math inline">\(\bar{x}\)</span>, we can test hypothesis about our
+sample mean <span class="math inline">\(\mu\)</span>. Specifically, the
+null hypothesis (<span class="math inline">\(H_0\)</span>) stating
+that,</p>
 <ul>
 <li><p><span class="math inline">\(\mu = \mu_{H_0}\)</span> (a
 two-tailed test)</p></li>
@@ -458,18 +473,18 @@ right-tailed test)</p></li>
 left-tailed test)</p></li>
 </ul>
 <p>We make this decision follow the logic that: if, given the null
-hypothesis is true, the probability of getting a sample mean <span class="math inline">\(\bar{x}\)</span> (or its corresponding test
-statistics <span class="math inline">\(z\)</span>) that is as extreme or
-more extreme as the observed sample mean <span class="math inline">\(\hat{\bar{x}}\)</span> (or its corresponding test
-statistics <span class="math inline">\(\hat{z}\)</span>) is smaller than
-some threshold (<span class="math inline">\(\alpha\)</span>), we would
-rather believe the null hypothesis is not true.</p>
+hypothesis is true, the probability of getting a sample mean <span class="math inline">\(\bar{X}\)</span> (or its corresponding test
+statistics <span class="math inline">\(Z\)</span>) that is as extreme or
+more extreme as the observed sample mean <span class="math inline">\(\bar{x}\)</span> (or its corresponding test
+statistics <span class="math inline">\(z\)</span>) is smaller than some
+threshold (<span class="math inline">\(\alpha\)</span>), we would rather
+believe the null hypothesis is not true.</p>
 <p>The <strong>p-value</strong> represents the probability of observing
-a test statistic <span class="math inline">\(z = \frac{\sqrt{n} \cdot
-(\bar{x} - \mu_0)}{\sigma}\)</span> as extreme as, or more extreme than,
-the one computed from the sample <span class="math inline">\(\hat{z} =
-\frac{\sqrt{n} \cdot (\hat{\bar{x}} - \mu_0)}{\sigma}\)</span>, given
-that the null hypothesis is true.</p>
+a test statistic <span class="math inline">\(Z = \frac{\sqrt{n} \cdot
+(\bar{X} - \mu_0)}{\sigma}\)</span> as extreme as, or more extreme than,
+the one computed from the sample <span class="math inline">\(z =
+\frac{\sqrt{n} \cdot (\bar{x} - \mu_0)}{\sigma}\)</span>, given that the
+null hypothesis is true.</p>
 <p>The threshold we set is called significance level, denoted as <span class="math inline">\(\alpha\)</span>. As we reject the null if the
 p-value is below <span class="math inline">\(\alpha\)</span>, this also
 means that we have the probability of <span class="math inline">\(\alpha\)</span> to falsely reject the null given
@@ -477,10 +492,11 @@ our null is true and our observed case is indeed extreme (known as Type
 I error).</p>
 <p>Moreover, given the distribution under the null, the <span class="math inline">\(\alpha\)</span> correspond to a specific value(s)
 of z called the critical value(s), which we can denote as <span class="math inline">\(z_c\)</span>.</p>
-<p>There are two pratical ways we could conduct this hypothesis testing
+<p>There are two practical ways we could conduct this hypothesis testing
 (they are actually the same), we could either calculate the p-value and
 compare them to the <span class="math inline">\(\alpha\)</span>, or
-compare the test statistics <span class="math inline">\(\hat{z}\)</span>with the critical value <span class="math inline">\(z_c\)</span>.</p>
+compare the test statistics <span class="math inline">\(z\)</span>with
+the critical value <span class="math inline">\(z_c\)</span>.</p>
 </div>
 <div id="calculation-of-p-value" class="section level4">
 <h4><strong>2. Calculation of p-value</strong></h4>
@@ -493,66 +509,65 @@ doing a <strong>two-tail test</strong>.</p>
 or more extreme” than the observed test statistic, we’re considering
 deviations in both positive and negative directions from zero.</p>
 <ul>
-<li>Specifically, if <span class="math inline">\(\hat{z}\)</span> is
-positive, the p-value encompasses the probability of getting a z-value
-greater than or equal to <span class="math inline">\(\hat{z}\)</span>
-and the probability of observing a z-value less than or equal to <span class="math inline">\(-\hat{z}\)</span>.</li>
+<li>Specifically, if <span class="math inline">\(z\)</span> is positive,
+the p-value encompasses the probability of getting a <span class="math inline">\(Z\)</span> that is greater than or equal to <span class="math inline">\(z\)</span> and the probability of observing a
+z-value less than or equal to <span class="math inline">\(-z\)</span>.</li>
 </ul>
 <p>Therefore, the two-tailed p-value is:</p>
 <p><span class="math display">\[
 \begin{align*}
-\text{If}\ \hat{z} &gt; 0\ \text{and } &amp; \text{alternative hypo: }\
+\text{If}\ z &gt; 0\ \text{and } &amp; \text{alternative hypo: }\
 \mu\neq \mu_{H_0}, \\[2ex]
-p\text{-value} =&amp; P(z &gt; \hat{z}) + P(z &lt; -\hat{z}) = (1 -
-\Phi(\hat{z})) + \Phi(-\hat{z}) =\int^{\infty}_{\hat{z}} f_{pdf}(z)\ dz
-+ \int^{-\hat{z}}_{-\infty} f_{pdf}(z)\ dz,\\[2ex]
+p\text{-value} =&amp; P(Z &gt; z) + P(Z &lt; -z)\\ =&amp; (1 - \Phi(z))
++ \Phi(-z) =\int^{\infty}_{z} f_{pdf}(Z)\ dZ + \int^{-z}_{-\infty}
+f_{pdf}(Z)\ dZ,\\[2ex]
 &amp; \text{As the distribution is symmetrical to 0}\\[2ex]
-=&amp; 2 \cdot P(z &gt; \hat{z}) = 2 \cdot (1-\Phi(\hat{z})) = 2 \cdot
-\int^{\infty}_{\hat{z}}f(z)dz\\[2ex]
-=&amp; 2 \cdot P(z &lt; -\hat{z}) = 2 \cdot \Phi(-\hat{z})= 2 \cdot
-\int^{-\hat{z}}_{-\infty}f(z)dz\\[2ex]
+=&amp; 2 \cdot P(Z &gt; z) = 2 \cdot (1-\Phi(z)) = 2 \cdot
+\int^{\infty}_{z}f(Z)dZ\\[2ex]
+=&amp; 2 \cdot P(Z &lt; -z) = 2 \cdot \Phi(-z)= 2 \cdot
+\int^{-z}_{-\infty}f(Z)dZ\\[2ex]
 &amp; \text{In abosolute sense: }\\[2ex]
-=&amp; 2 \cdot P(z &gt; |\hat{z}|) = 2 \cdot (1-\Phi(|\hat{z}|)) = 2
-\cdot \int^{\infty}_{|\hat{z}|}f(z)dz\\[2ex]
-\hat{z}\ \text{denote the } &amp; z\  \text{value calculated from the
-sample}
+=&amp; 2 \cdot P(Z &gt; |z|) = 2 \cdot (1-\Phi(|z|)) = 2 \cdot
+\int^{\infty}_{|z|}f(Z)dZ\\[2ex]
+z = &amp;\frac{\sqrt{n} \cdot (\bar{x} - \mu_0)}{\sigma}\ \text{is
+calculated from the observed sample}
 \end{align*}
 \]</span></p>
 <ul>
-<li>Conversely, if <span class="math inline">\(\hat{z}\)</span> is
-negative, we consider values less than or equal to <span class="math inline">\(\hat{z}\)</span> and those greater than or equal
-to <span class="math inline">\(-\hat{z}\)</span>.</li>
+<li>Conversely, if <span class="math inline">\(z\)</span> is negative,
+we consider values less than or equal to <span class="math inline">\(z\)</span> and those greater than or equal to
+<span class="math inline">\(-z\)</span>.</li>
 </ul>
 <p><span class="math display">\[
 \begin{align*}
-\text{If}\ \hat{z} &lt; 0\ \text{and } &amp; \text{alternative hypo: }\
+\text{If}\ z &lt; 0\ \text{and } &amp; \text{alternative hypo: }\
 \mu\neq \mu_{H_0}, \\[2ex]
-p\text{-value} =&amp; P(z &lt; \hat{z}) + P(z &gt; -\hat{z}) =
-\Phi(\hat{z}) + (1-\Phi(-\hat{z}))=\int^{\hat{z}}_{-\infty} f_{pdf}(z)\
-dz + \int^{\infty}_{-\hat{z}} f_{pdf}(z)\ dz,\\[2ex]
+p\text{-value} =&amp; P(Z &lt; z) + P(Z &gt; -z) = \Phi(z) +
+(1-\Phi(-z))=\int^{z}_{-\infty} f_{pdf}(Z)\ dZ + \int^{\infty}_{-z}
+f_{pdf}(Z)\ dZ,\\[2ex]
 &amp; \text{As the distribution is symmetrical to 0}\\[2ex]
-=&amp; 2 \cdot P(z &lt; \hat{z}) = 2 \cdot \Phi(\hat{z}) = 2 \cdot
-\int^{\hat{z}}_{-\infty}f(z)dz\\[2ex]
-=&amp; 2 \cdot P(z &gt; -\hat{z}) = 2 \cdot (1-\Phi(-\hat{z})) =2 \cdot
-\int^{\infty}_{-\hat{z}}f(z)dz\\[2ex]
+=&amp; 2 \cdot P(Z &lt; z) = 2 \cdot \Phi(z) = 2 \cdot
+\int^{z}_{-\infty}f(Z)dZ\\[2ex]
+=&amp; 2 \cdot P(Z &gt; -z) = 2 \cdot (1-\Phi(-z)) =2 \cdot
+\int^{\infty}_{-z}f(Z)dZ\\[2ex]
 &amp; \text{In abosolute sense: }\\[2ex]
-=&amp; 2 \cdot P(z &gt; |\hat{z}|) =  2 \cdot (1-\Phi(|\hat{z}|)) =2
-\cdot \int^{\infty}_{|\hat{z}|}f(z)dz\\[2ex]
-\hat{z}\ \text{denote the } &amp; z\  \text{value calculated from the
-sample}
+=&amp; 2 \cdot P(Z &gt; |z|) =  2 \cdot (1-\Phi(|z|)) =2 \cdot
+\int^{\infty}_{|z|}f(Z)dZ\\[2ex]
+z = &amp;\frac{\sqrt{n} \cdot (\bar{x} - \mu_0)}{\sigma}\ \text{is
+calculated from the observed sample}
 \end{align*}
 \]</span></p>
 <ul>
 <li>Overall, we can combine these two scenarios by using the absolute
-value of <span class="math inline">\(\hat{z}\)</span>.</li>
+value of <span class="math inline">\(z\)</span>.</li>
 </ul>
 <p><span class="math display">\[
-\text{Overall, for two-tailed test} \\[2ex]
-p\text{-value} = 2 \cdot P(z &gt; |\hat{z}|) = 2 \cdot
-(1-\Phi(|\hat{z}|)) = 2 \cdot
-\int^{\infty}_{|\hat{z}|}f_{pdf}(z)dz,\quad  \text{alternative hypo: }
-\mu\neq \mu_{H_0}\\[2ex]
-\hat{z}\ \text{denote the } z\  \text{value calculated from the sample}
+\text{Overall, for two-tailed test, alternative hypo: } \mu\neq
+\mu_{H_0}\\[2ex]
+p\text{-value} = 2 \cdot P(Z &gt; |z|) = 2 \cdot (1-\Phi(|z|)) = 2 \cdot
+\int^{\infty}_{|z|}f_{pdf}(Z)dZ,\\[2ex]
+z = \frac{\sqrt{n} \cdot (\bar{x} - \mu_0)}{\sigma}\ \text{is calculated
+from the observed sample}
 \]</span></p>
 </div>
 <div id="one-tail-test-p-value" class="section level5">
@@ -568,46 +583,45 @@ deviations only in one direction from zero.</p>
 <p><span class="math display">\[
 p-value=
 \begin{cases}
-P(z &gt; \hat{z}) = 1 - \Phi(\hat{z})=\int^{\infty}_{\hat{z}}
-f_{pdf}(z)\ dz,\quad \text{alternative hypo: } \mu&gt; \mu_{H_0}\\[2ex]
-P(z &lt; \hat{z}) = \Phi(\hat{z})= \int^{\hat{z}}_{-\infty} f_{pdf}(z)\
-dz, \quad \text{alternative hypo: } \mu &lt; \mu_{H_0}\\[2ex]
+P(Z &gt; z) = 1 - \Phi(z)=\int^{\infty}_{z} f_{pdf}(Z)\ dZ,\quad
+\text{alternative hypo: } \mu&gt; \mu_{H_0}\\[2ex]
+P(Z &lt; z) = \Phi(z)= \int^{z}_{-\infty} f_{pdf}(Z)\ dZ, \quad
+\text{alternative hypo: } \mu &lt; \mu_{H_0}\\[2ex]
 \end{cases} \\[2ex]
-\hat{z}\ \text{denote the } z\  \text{value calculated from the sample}
+z = \frac{\sqrt{n} \cdot (\bar{x} - \mu_0)}{\sigma}\ \text{is calculated
+from the observed sample}
 \]</span></p>
 <p>If the p-value is smaller than our significance level <span class="math inline">\(\alpha\)</span>, we can reject the null.</p>
 <p>That is:</p>
-<p><span class="math display">\[p-value(\hat{z}) &lt; \alpha \Rightarrow
+<p><span class="math display">\[p-value(z) &lt; \alpha \Rightarrow
 \text{reject } H_0: \mu = \mu_{H_0}\]</span></p>
 </div>
 </div>
 <div id="critical-value-and-rejection-area" class="section level4">
 <h4><strong>3. Critical value and rejection area</strong></h4>
 <p>Alternatively, we could choose to not to calculate p-value for our
-observed <span class="math inline">\(\hat{z}\)</span>, but compare our
-<span class="math inline">\(\hat{z}\)</span> to the z value(s)
-corresponding to our <span class="math inline">\(\alpha\)</span>.</p>
+observed <span class="math inline">\(z\)</span>, but compare our <span class="math inline">\(z\)</span> to the z value(s) corresponding to our
+<span class="math inline">\(\alpha\)</span>.</p>
 <div id="two-tailed-test" class="section level5">
 <h5><strong>Two-tailed test</strong></h5>
 <p>Under a two-tailed test, we use:</p>
 <p><span class="math display">\[
-Pr(z &gt; |\hat{z}|) &lt; \frac{1}{2}\alpha
+Pr(Z &gt; |z|) &lt; \frac{1}{2}\alpha
 \]</span></p>
 <p>The critical value <span class="math inline">\(z_{\alpha/2}\)</span>
 is defined as:</p>
 <p><span class="math display">\[
-z_{\alpha/2}= arg_{z_i} \Big[Pr(z &gt; z_{i}) = \frac{ \alpha}{2} \Big]
-= 1 - \Phi^{-1} \Big(\frac{ \alpha}{2} \Big)
+z_{\alpha/2}= arg_{z_i} \Big[Pr(Z &gt; z_{i}) = \frac{ \alpha}{2} \Big]
+= \Phi^{-1} \Big(1 -\frac{ \alpha}{2} \Big)
 \]</span></p>
 <p>Due to the symmetry of the standard normal distribution:</p>
 <p><span class="math display">\[
--z_{\alpha/2} = arg_{z_i} \Big[Pr(z &lt; -z_{i}) = \frac{ \alpha}{2}
+-z_{\alpha/2} = arg_{z_i} \Big[Pr(Z &lt; -z_{i}) = \frac{ \alpha}{2}
 \Big] =\Phi^{-1} \Big(\frac{ \alpha}{2} \Big)
 \]</span></p>
 <p>Our decision rule then implies:</p>
 <p><span class="math display">\[
-|\hat{z}| &gt; z_{\alpha/2},\ \text{if alternative hypo: } \mu \neq
-\mu_{H_0}
+|z| &gt; z_{\alpha/2},\ \text{if alternative hypo: } \mu \neq \mu_{H_0}
 \]</span></p>
 </div>
 <div id="one-tailed-test" class="section level5">
@@ -616,10 +630,10 @@ z_{\alpha/2}= arg_{z_i} \Big[Pr(z &gt; z_{i}) = \frac{ \alpha}{2} \Big]
 <p><span class="math display">\[
 z_{\alpha} =
 \begin{cases}
-arg_{z_i}[Pr(z &gt; z_{i}) = \alpha]
-= 1-\Phi^{-1}(\alpha), &amp; \text{if alternative hypo: } \mu&gt;
+arg_{z_i}[Pr(Z &gt; z_{i}) = \alpha]
+= \Phi^{-1}(1-\alpha), &amp; \text{if alternative hypo: } \mu&gt;
 \mu_{H_0}\\[2ex]
-arg_{z_i}[Pr(z &lt; z_{i}) = \alpha]
+arg_{z_i}[Pr(Z &lt; z_{i}) = \alpha]
 = \Phi^{-1}(\alpha), &amp; \text{if alternative hypo: } \mu &lt;
 \mu_{H_0}\\[2ex]
 \end{cases}
@@ -628,13 +642,11 @@ arg_{z_i}[Pr(z &lt; z_{i}) = \alpha]
 to:</p>
 <p><span class="math display">\[
 \begin{cases}
-\hat{z} &gt; z_{\alpha}, &amp; \text{if alternative hypo: } \mu&gt;
+z &gt; z_{\alpha}, &amp; \text{if alternative hypo: } \mu&gt;
 \mu_{H_0}\\[2ex]
-\hat{z} &lt; z_{\alpha}, &amp; \text{if alternative hypo: } \mu &lt;
+z &lt; z_{\alpha}, &amp; \text{if alternative hypo: } \mu &lt;
 \mu_{H_0}\\[2ex]
 \end{cases}\\[2ex]
-\hat{z}\ \text{denote the z value calculated from the sample}\\
-z_{\alpha} \text{ is known as critical value}
 \]</span></p>
 </div>
 </div>
@@ -677,41 +689,39 @@ true expectation and our hypothetical expectation is:</p>
 \]</span> Our original statistics can be written as:</p>
 <p><span class="math display">\[
 \begin{align*}
-z =&amp; \frac{\sqrt{n} \cdot (\bar{x} - \mu_{H_0})}{\sigma}\\
-=&amp; \frac{\sqrt{n} \cdot [\bar{x} - (\mu_{H_1} - \Delta)]}{\sigma}\\
-=&amp; \frac{\sqrt{n} \cdot (\bar{x} - \mu_{H_1} +  \Delta)}{\sigma}\\
-=&amp; \frac{\sqrt{n} \cdot (\bar{x} - \mu_{H_1})}{\sigma} +
+Z =&amp; \frac{\sqrt{n} \cdot (\bar{X} - \mu_{H_0})}{\sigma}\\
+=&amp; \frac{\sqrt{n} \cdot [\bar{X} - (\mu_{H_1} - \Delta)]}{\sigma}\\
+=&amp; \frac{\sqrt{n} \cdot (\bar{X} - \mu_{H_1} +  \Delta)}{\sigma}\\
+=&amp; \frac{\sqrt{n} \cdot (\bar{X} - \mu_{H_1})}{\sigma} +
 \frac{\sqrt{n} \cdot \Delta}{\sigma}\\
 \end{align*}
 \]</span></p>
-<p>The first term of z can be seen as the z-statistics under the true
-expectation <span class="math inline">\(\mu_{H_1}\)</span>, let’s denote
-it as <span class="math inline">\(z&#39;\)</span>.</p>
+<p>The first term of <span class="math inline">\(Z\)</span> can be seen
+as the z-statistics under the true expectation <span class="math inline">\(\mu_{H_1}\)</span>, let’s denote it as <span class="math inline">\(Z&#39;\)</span>.</p>
 <p>Let’s define <span class="math inline">\(\delta\)</span> as below.
 <span class="math inline">\(\delta\)</span> is referred to as the
 non-centrality parameter (NCP) because it measures how much the
-distribution of <span class="math inline">\(z&#39;\)</span> diverge from
+distribution of <span class="math inline">\(Z&#39;\)</span> diverge from
 the central distribution of <span class="math inline">\(z\)</span></p>
 <p><span class="math display">\[
 \delta = \frac{\Delta \sqrt{n}}{\sigma}
 \]</span></p>
 <p><span class="math display">\[
-z = z&#39; + \delta \Rightarrow z&#39;=z-\delta
+Z = Z&#39; + \delta \Rightarrow Z&#39;=Z-\delta
 \]</span></p>
-<p>Thus, the power would be the probability that the <span class="math inline">\(z&#39;\)</span> is in the rejection area, or more
-simply, use <span class="math inline">\(z_{H_1}\)</span> to replace the
-<span class="math inline">\(\hat{z}\)</span> in our decision rule
-above:</p>
+<p>Thus, the power would be the probability that the <span class="math inline">\(Z&#39;\)</span> is in the rejection area, or more
+simply, use <span class="math inline">\(Z&#39;\)</span> to replace the
+<span class="math inline">\(z\)</span> in our decision rule above:</p>
 <div id="two-tailed-test-1" class="section level5">
 <h5><strong>Two-tailed test</strong></h5>
 <p>For two-tailed test:</p>
 <p><span class="math display">\[
 \begin{align*}
-Power =&amp; Pr(|z&#39;| &gt; z_{\alpha/2})\\
-=&amp; Pr(z&#39; &gt; z_{\alpha/2}) + Pr(z&#39; &lt; -z_{\alpha/2})\\
-=&amp; Pr(z - \delta &gt; z_{\alpha/2}) + Pr(z - \delta &lt;
+Power =&amp; Pr(|Z&#39;| &gt; z_{\alpha/2})\\
+=&amp; Pr(Z&#39; &gt; z_{\alpha/2}) + Pr(Z&#39; &lt; -z_{\alpha/2})\\
+=&amp; Pr(Z - \delta &gt; z_{\alpha/2}) + Pr(Z - \delta &lt;
 -z_{\alpha/2})\\
-=&amp; Pr(z &gt; \delta + z_{\alpha/2}) + Pr(z &lt;
+=&amp; Pr(Z &gt; \delta + z_{\alpha/2}) + Pr(Z &lt;
 \delta-z_{\alpha/2})\\
 =&amp; 1 -\Phi(\delta + z_{\alpha/2}) + \Phi(\delta - z_{\alpha/2})\\
 &amp; \text{if alternative hypo: } \mu \neq \mu_{H_0}\\
@@ -726,13 +736,13 @@ Power =&amp; Pr(|z&#39;| &gt; z_{\alpha/2})\\
 \begin{align*}
 Power =&amp;
 \begin{cases}
-Pr(z&#39; &gt; z_{\alpha})
-=Pr(z - \delta &gt; z_{\alpha})
-=Pr(z &gt; \delta + z_{\alpha}) = 1- \Phi(\delta + z_{\alpha}),\
+Pr(Z&#39; &gt; z_{\alpha})
+=Pr(Z - \delta &gt; z_{\alpha})
+=Pr(Z &gt; \delta + z_{\alpha}) = 1- \Phi(\delta + z_{\alpha}),\
 \text{if alternative hypo: } \mu&gt; \mu_{H_0}\\[2ex]
-Pr(z&#39; &lt; z_{\alpha})
-=Pr(z - \delta &lt; z_{\alpha})
-=Pr(z &lt; \delta + z_{\alpha}) = \Phi(\delta + z_{\alpha}),\ \ \ \ \ \
+Pr(Z&#39; &lt; z_{\alpha})
+=Pr(Z - \delta &lt; z_{\alpha})
+=Pr(Z &lt; \delta + z_{\alpha}) = \Phi(\delta + z_{\alpha}),\ \ \ \ \ \
 \ \  \text{if alternative hypo: } \mu&lt; \mu_{H_0}\\[2ex]
 \end{cases}\\[2ex]
 \text{with}\ \  \delta =&amp; \frac{\sqrt{n} \cdot (\mu_{H_1} -
@@ -745,27 +755,25 @@ Pr(z&#39; &lt; z_{\alpha})
 <h4><strong>2. Post-hoc power analysis</strong></h4>
 <p>The post-hoc power analysis indicates that, if the null hypothesis is
 false, the probability that the one-sample z-test would correctly reject
-the null hypothesis based on the observed sample mean <span class="math inline">\(\hat{\bar{x}}\)</span>. Here the logic that we use
-the sample mean <span class="math inline">\(\hat{\bar{x}}\)</span> is
-that we do not know the ‘true’ distribution parameter and the sample
-mean is the best estimate we have.</p>
+the null hypothesis based on the observed sample mean <span class="math inline">\(\bar{x}\)</span>. Here the logic that we use the
+sample mean <span class="math inline">\(\bar{x}\)</span> is that we do
+not know the ‘true’ distribution parameter and the sample mean is the
+best estimate we have.</p>
 <p><span class="math display">\[
-\text{When } \mu_{H_1} =  \hat{\bar{x}},\\
-\delta = \frac{\sqrt{n} \cdot (\hat{\bar{x}} - \mu_{H_0})}{\sigma}
-=\hat{z}
+\text{When } \mu_{H_1} =  \bar{x},\\
+\delta = \frac{\sqrt{n} \cdot (\bar{x} - \mu_{H_0})}{\sigma} =z
 \]</span></p>
 <p>Thus, for a one-sample z-test, the NCP given observed sample mean
-<span class="math inline">\(\hat{\bar{x}}\)</span> actually is the same
-as the observed z statistics <span class="math inline">\(\hat{z}\)</span>.</p>
+<span class="math inline">\(\bar{x}\)</span> actually is the same as the
+observed <span class="math inline">\(z\)</span>.</p>
 <div id="two-tailed-test-2" class="section level5">
 <h5><strong>Two-tailed test</strong></h5>
 <p>For two-tailed test:</p>
 <p><span class="math display">\[
 \begin{align*}
-Power =&amp; Pr(z &gt; \hat{z} + z_{\alpha/2}) + Pr(z &lt; \hat{z}
--z_{\alpha/2})\\
-=&amp; 1 -\Phi(\hat{z} + z_{\alpha/2}) + \Phi(\hat{z} - z_{\alpha/2})\\
-\text{where }\hat{z} &amp;= \frac{\sqrt{n} \cdot (\hat{\bar{x}} -
+Power =&amp; Pr(Z &gt; z + z_{\alpha/2}) + Pr(Z &lt; z -z_{\alpha/2})\\
+=&amp; 1 -\Phi(z + z_{\alpha/2}) + \Phi(z - z_{\alpha/2})\\
+\text{where }z &amp;= \frac{\sqrt{n} \cdot (\bar{x} -
 \mu_{H_0})}{\sigma}\\
 &amp; \text{if alternative hypo: } \mu \neq \mu_{H_0}\\
 \end{align*}
@@ -778,12 +786,12 @@ Power =&amp; Pr(z &gt; \hat{z} + z_{\alpha/2}) + Pr(z &lt; \hat{z}
 \begin{align*}
 Power =&amp;
 \begin{cases}
-Pr(z &gt; \hat{z} + z_{\alpha}) = 1- \Phi(\hat{z} + z_{\alpha}),\
-\text{if alternative hypo: } \mu&gt; \mu_{H_0}\\[2ex]
-Pr(z &lt; \hat{z} + z_{\alpha}) = \Phi(\hat{z} + z_{\alpha}),\ \ \ \ \ \
-\ \  \text{if alternative hypo: } \mu&lt; \mu_{H_0}\\[2ex]
+Pr(Z &gt; z + z_{\alpha}) = 1- \Phi(z + z_{\alpha}),\ \text{if
+alternative hypo: } \mu&gt; \mu_{H_0}\\[2ex]
+Pr(Z &lt; z + z_{\alpha}) = \Phi(z + z_{\alpha}),\ \ \ \ \ \ \
+\  \text{if alternative hypo: } \mu&lt; \mu_{H_0}\\[2ex]
 \end{cases}\\[2ex]
-\text{with}\ \  \hat{z} &amp;= \frac{\sqrt{n} \cdot (\hat{\bar{x}} -
+\text{with}\ \  z &amp;= \frac{\sqrt{n} \cdot (\bar{x} -
 \mu_{H_0})}{\sigma}
 \end{align*}
 \]</span></p>
@@ -796,10 +804,10 @@ is falselt accepted because low power of the test.</p>
 <div id="priori-power-analysis" class="section level4">
 <h4><strong>3. Priori power analysis</strong></h4>
 <p>The priori power analysis is aimed to estimate the sample size n
-needed given a desired power and assumed <span class="math inline">\(\alpha\)</span> and effect size d (let <span class="math inline">\(\mu = \bar{x}\)</span>).</p>
+needed given a desired power and assumed <span class="math inline">\(\alpha\)</span> and effect size d (let <span class="math inline">\(\mu = \bar{X}\)</span>).</p>
 <p><span class="math display">\[
-Cohen&#39;s\ d =  \frac{\bar{x} - \mu_{H_0}}{\sigma}\\
-\delta = \frac{\sqrt{n} \cdot (\bar{x} - \mu_{H_0})}{\sigma} = d \cdot
+Cohen&#39;s\ d =  \frac{\bar{X} - \mu_{H_0}}{\sigma}\\
+\delta = \frac{\sqrt{n} \cdot (\bar{X} - \mu_{H_0})}{\sigma} = d \cdot
 \sqrt{n}
 \]</span></p>
 <div id="two-tailed-test-3" class="section level5">
@@ -807,7 +815,7 @@ Cohen&#39;s\ d =  \frac{\bar{x} - \mu_{H_0}}{\sigma}\\
 <p>For two-tailed test, remind ourselve that its power is:</p>
 <p><span class="math display">\[
 \begin{align*}
-Power =&amp; Pr(z &gt; \delta + z_{\alpha/2}) + Pr(z &lt; \delta
+Power =&amp; Pr(Z &gt; \delta + z_{\alpha/2}) + Pr(Z &lt; \delta
 -z_{\alpha/2})\\
 =&amp; 1 -\Phi(\delta + z_{\alpha/2}) + \Phi(\delta - z_{\alpha/2})\\
 &amp; \text{if alternative hypo: } \mu \neq \mu_{H_0}\\
@@ -829,7 +837,7 @@ elementary functions) but can be solved numerically, so we could rely on
 computation to solve n.</p>
 <p>At the same time, the transcendental equation can be hard to
 interpret, but we could use some intuition, the two terms on the left is
-the sum of the y value of two points symmetrical to <span class="math inline">\(z = z_{\alpha /2}\)</span> (which is to the left
+the sum of the y value of two points symmetrical to <span class="math inline">\(Z = z_{\alpha /2}\)</span> (which is to the left
 of the x = 0), as <span class="math inline">\(\alpha\)</span> is fixed,
 we could only decide the how spread these two points are from the
 center. As the cdf function increase slower and slower on the right
@@ -847,9 +855,9 @@ also need to increase quadratically.</p>
 \begin{align*}
 Power =&amp;
 \begin{cases}
-Pr(z &gt;\delta + z_{\alpha}) = 1- \Phi(\delta + z_{\alpha}),\ \text{if
+Pr(Z &gt;\delta + z_{\alpha}) = 1- \Phi(\delta + z_{\alpha}),\ \text{if
 alternative hypo: } \mu&gt; \mu_{H_0}\\[2ex]
-Pr(z &lt; \delta + z_{\alpha}) = \Phi(\delta + z_{\alpha}),\ \ \ \ \ \ \
+Pr(Z &lt; \delta + z_{\alpha}) = \Phi(\delta + z_{\alpha}),\ \ \ \ \ \ \
 \  \text{if alternative hypo: } \mu&lt; \mu_{H_0}\\[2ex]
 \end{cases}\\[2ex]
 \end{align*}
