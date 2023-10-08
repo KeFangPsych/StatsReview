@@ -13,7 +13,7 @@
 
 <meta name="date" content="2023-10-03" />
 
-<title>One-sample z-test: Hypothesis Testing, Effect Size, and Power</title>
+<title>One-sample Z-test: Hypothesis Testing, Effect Size, and Power</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -350,7 +350,7 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">One-sample z-test: Hypothesis Testing,
+<h1 class="title toc-ignore">One-sample Z-test: Hypothesis Testing,
 Effect Size, and Power</h1>
 <h4 class="author">Ke (Kay) Fang (<a href="mailto:kf2393@nyu.edu" class="email">kf2393@nyu.edu</a>)</h4>
 <h4 class="date">2023-10-03</h4>
@@ -375,7 +375,7 @@ detect any inaccuracies or inconsistencies, please don’t hesitate to let
 me know, and I’ll make the necessary updates. Happy learning! ;)</p>
 </div>
 <div id="single-sample-z-test" class="section level2">
-<h2>Single sample z test</h2>
+<h2>Single sample Z-test</h2>
 <div id="i.-the-data-generating-process" class="section level3">
 <h3><strong>I. The Data Generating Process</strong></h3>
 <p>In a single sample z-test, our data generating process (DGP) assumes
@@ -451,7 +451,7 @@ Z|\mu, \sigma,n = \frac{\sqrt{n} \cdot (\bar{Z} - \mu)}{\sigma}
 <div id="logic-of-hypothesis-testing-the-null-hypothesis" class="section level4">
 <h4><strong>1. Logic of Hypothesis Testing: The Null
 Hypothesis</strong></h4>
-<p>For a one-sample z-test, we assume we know the variance parameter
+<p>For a one-sample Z-test, we assume we know the variance parameter
 <span class="math inline">\(\sigma^2\)</span> of our data generating
 distribution (a very unrealistic assumption, but let’s stick with it for
 now)</p>
@@ -656,7 +656,7 @@ z &lt; z_{\alpha}, &amp; \text{if alternative hypo: } \mu &lt;
 <p>The idea behind effect size is to calculate a statistic that measure
 how large the difference actually is and make this statistic comparable
 across different situations.</p>
-<p>Our intuitive effect size in the single sample z-test might be <span class="math inline">\(\bar{x} - \mu_0 = \bar{x} - \mu_{H_0}\)</span>,
+<p>Our intuitive effect size in the single sample Z-test might be <span class="math inline">\(\bar{x} - \mu_0 = \bar{x} - \mu_{H_0}\)</span>,
 given our hypothesized <span class="math inline">\(\mu_0 =
 \mu_{H_0}\)</span>.</p>
 <p>But this statistic is not comparable across situations, as the same
@@ -677,7 +677,7 @@ Cohen&#39;s\ d = \frac{z}{\sqrt{n}},\  \text{if}\ H_0:\mu=\mu_{H_0}\\
 <h3><strong>IV. The Power</strong></h3>
 <div id="theoretical-derivation-of-power" class="section level4">
 <h4><strong>1. Theoretical Derivation of Power</strong></h4>
-<p>The power indicate the probability that the z-test correctly reject
+<p>The power indicate the probability that the Z-test correctly reject
 the null (<span class="math inline">\(H_0: \mu = \mu_{H_0}\)</span>). In
 other word, if the <span class="math inline">\(\mu \neq
 \mu_{H_0}\)</span>, what’s our chance of detecting this difference?.</p>
@@ -754,7 +754,7 @@ Pr(Z&#39; &lt; z_{\alpha})
 <div id="post-hoc-power-analysis" class="section level4">
 <h4><strong>2. Post-hoc power analysis</strong></h4>
 <p>The post-hoc power analysis indicates that, if the null hypothesis is
-false, the probability that the one-sample z-test would correctly reject
+false, the probability that the one-sample Z-test would correctly reject
 the null hypothesis based on the observed sample mean <span class="math inline">\(\bar{x}\)</span>. Here the logic that we use the
 sample mean <span class="math inline">\(\bar{x}\)</span> is that we do
 not know the ‘true’ distribution parameter and the sample mean is the
@@ -763,7 +763,7 @@ best estimate we have.</p>
 \text{When } \mu_{H_1} =  \bar{x},\\
 \delta = \frac{\sqrt{n} \cdot (\bar{x} - \mu_{H_0})}{\sigma} =z
 \]</span></p>
-<p>Thus, for a one-sample z-test, the NCP given observed sample mean
+<p>Thus, for a one-sample Z-test, the NCP given observed sample mean
 <span class="math inline">\(\bar{x}\)</span> actually is the same as the
 observed <span class="math inline">\(z\)</span>.</p>
 <div id="two-tailed-test-2" class="section level5">
@@ -795,8 +795,8 @@ Pr(Z &lt; z + z_{\alpha}) = \Phi(z + z_{\alpha}),\ \ \ \ \ \ \
 \mu_{H_0})}{\sigma}
 \end{align*}
 \]</span></p>
-<p>If the z-test is already significant, a post-hoc power analysis may
-not be useful as we have already rejected the null. But if the z-test is
+<p>If the Z-test is already significant, a post-hoc power analysis may
+not be useful as we have already rejected the null. But if the Z-test is
 non-significant, a low power may indicate the possibility that the null
 is falselt accepted because low power of the test.</p>
 </div>
