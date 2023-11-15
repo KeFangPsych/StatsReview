@@ -837,16 +837,16 @@ elementary functions) but can be solved numerically, so we could rely on
 computation to solve n.</p>
 <p>At the same time, the transcendental equation can be hard to
 interpret, but we could use some intuition, the two terms on the left is
-the sum of the y value of two points symmetrical to <span class="math inline">\(Z = z_{\alpha /2}\)</span> (which is to the left
+the sum of the y value of two points symmetrical to <span class="math inline">\(Z = z_{\alpha /2}\)</span> (which is to the right
 of the x = 0), as <span class="math inline">\(\alpha\)</span> is fixed,
 we could only decide the how spread these two points are from the
 center. As the cdf function increase slower and slower on the right
-side, the wider the spread, the sum tend to get smaller. If we decide a
-specific effect size d to detect, we can see power increase (our test
-being more effective in rejecting the null), our sample size n need to
-increase quadratically. Similarly, if we fix the power, as desired
-effect size d decrease (we want to detect small effect), the sample size
-also need to increase quadratically.</p>
+side, the wider the spread, the sum tend to get smaller. If we fix the
+power, as desired effect size d decrease (we want to detect small
+effect), the sample size also need to increase quadratically (a <span class="math inline">\(k*d\)</span> change in d lead to a <span class="math inline">\((1/k^2)*n\)</span> change in n). Similarly, if we
+decide a specific effect size d to detect, we can see power increase
+(our test being more effective in rejecting the null), our sample size n
+need to increase roughly quadratically (not strictly as <span class="math inline">\(\Phi^{-1}\)</span> is not linear).</p>
 </div>
 <div id="one-tailed-test-3" class="section level5">
 <h5><strong>One-tailed test</strong></h5>
@@ -880,12 +880,15 @@ Power = \Phi(d \cdot \sqrt{n} + z_{\alpha}),\\
 \text{if alternative hypo: } \mu&lt; \mu_{H_0}\\
 \]</span></p>
 <p>These equations are more intuitive. As the effect size aimed to
-detect decrease, the sample size n need to increase quadratically. As
-the power and significance level increase (for right-tailed <span class="math inline">\(z_{\alpha}\)</span> become more positive and for
-right-tailed <span class="math inline">\(z_{\alpha}\)</span> become more
+detect decrease, the sample size n need to increase quadratically (if
+<span class="math inline">\(d\)</span> becomes half <span class="math inline">\(1/2*d\)</span> i.e. <span class="math inline">\(k
+*d, k=1/2\)</span>, n becomes <span class="math inline">\(4 * n\)</span>
+i.e., <span class="math inline">\((1/k^2) * n, k = 1/2\)</span>). As the
+power and significance level increase (for right-tailed <span class="math inline">\(z_{\alpha}\)</span> become more positive and for
+left-tailed <span class="math inline">\(z_{\alpha}\)</span> become more
 negative), the sample size n also roughly increase quadratically (not
-strictly as <span class="math inline">\(\Phi^{-1}\)</span> is not
-linear).</p>
+strictly as <span class="math inline">\(\Phi^{-1}\)</span> is not linear
+and the numerator is a quadratic form of a sum).</p>
 </div>
 </div>
 </div>
