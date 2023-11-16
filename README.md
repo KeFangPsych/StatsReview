@@ -1,7 +1,7 @@
 # StatsReview
 This a second brain of mine that keeps all the stats knowledge I am reviewing (or learning)
 
-I always have the fear of misuse of statistical models and have an admiration for understanding the "mathy" detail behind these models. So here are some notes I put together that delve into the details behind these models. However, this is by no means a mathematical guide on these topics. I am not officially trained in math or theoratical statistics, so these notes are just me trying my best to explain the math detail using both my own background in math. Feel free to let me know if anything is incorrect and I will be happy to make changes. Hppy learning! :)
+I always have an admiration for understanding the "mathy" detail behind these models and have a fear of misuse of models. So here are some notes I put together that delve into the math details behind these models. However, this is by no means a pure mathematical guide on these topics as I'm not officially trained in math or theoratical statistics. Feel free to let me know if anything is incorrect and I will be happy to make changes. Hppy learning! :)
 
 Review for Estimation Theory:
 
