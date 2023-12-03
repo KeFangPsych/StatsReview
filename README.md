@@ -5,7 +5,13 @@ I always have an admiration for understanding the "mathy" detail behind these mo
 
 Review for Estimation Theory:
 
-- What are estimators: How sample mean and variance can be understood as estimators
+- What are estimators: How sample mean and variance can be understood as estimators (almost done, https://kefangpsych.github.io/StatsReview/sample_mean_and_variance_as_estimators.html)
+
+In psychological statistics, sample mean and variance are typically introduced as summary statistics of discriptive statistics. This is intuitive and useful for understanding (maybe except for the n-1 for sample variance). However, their application becomes less straightforward when transitioning to inferential statistics, such as in z-tests or t-tests, where these statistics are employed in constructing the test statistics.
+
+In this tutorial, I try to elucidate the basic procedure of statistical modeling (inferential statistics) as 4 steps: model specification, estimation, statistical inference and model diagonisis and evaluation. Specifically, we will focus on the estimation procedure, which deals with the problem of how can we estimate some unknown parameters of the proposed DGP given sample data. For example, when estimating the average height of NYU students based on data from 10 students, one could either calculate the sample mean to make a guess or, more simplistically, assume it to be of 5'10". This section introduces fundamental concepts such as estimation, estimands, estimators, and estimates, along with the characteristics of estimators that make some more effective than others (e.g., why calculating the sample mean is generally preferable to assuming a fixed height of 5'10").
+
+In the final part, we apply this framework to demonstrate that the basic process of calculating the sample mean and variance actually serves as estimators (specific, method of moment and least square estimators) for the population expectation and variance. This discussion will also elucidate the use of n−1 in variance calculations and reveal situations where using n might be appropriate instead. Also, we will paradoxically show that wheras the sample variance will on average correctly estimate the variance of the DGP, the standard deviation of sample, does actually not. This foundation paves the way for future topics, including statistical inference regarding sample means and variances (given our educated guesses, how confidence are we?), and more complex estimation challenges like least squares and maximum likelihood estimation in linear regression.
 
 - OLS estimators of regression & Gaussian-Markov Assumption (why we need them)
 
