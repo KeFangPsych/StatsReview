@@ -364,14 +364,14 @@ modelling</strong></h3>
 <p>In statistics, we commonly employ a theoretical framework known as a
 <strong>Data Generating Process (DGP)</strong> to model the generation
 of data. This DGP, defined by certain <strong>parameters</strong>,
-governs how data is generated. For instance, when dealing with a single
-variable, we may assume that our data comprises independent observations
-drawn from an identical normal distribution, with the parameters of
-interest being the mean and variance of the distribution. Alternatively,
-we might describe one variable as a linear transformation of another
-variable with the addition of Gaussian noise. In this case, the
-parameters define both the relationship between the variables and the
-characteristics of the added noise.</p>
+governs how data is generated probabilistically. For instance, when
+dealing with a single variable, we may assume that our data comprises
+independent observations drawn from an identical normal distribution,
+with the parameters of interest being the mean and variance of the
+distribution. Alternatively, we might describe one variable as a linear
+transformation of another variable with the addition of Gaussian noise.
+In this case, the parameters define both the relationship between the
+variables and the characteristics of the added noise.</p>
 <p>The primary objective in statistics involves several key steps:
 first, specifying a plausible DGP; second, estimating the parameters
 associated with this DGP from data; third, probabilistic statements or
@@ -403,9 +403,10 @@ can refine or select a different DGP and repeat the process.</p>
 <div id="ii.-estimation" class="section level3">
 <h3><strong>II. Estimation</strong></h3>
 <p><strong>Estimation</strong> in statistical modeling involves
-harnessing observed data to determine the parameters of interest within
-our Data Generating Process (DGP). The parameter we seek to estimate is
-commonly known as the <strong>estimand</strong>, representing the
+harnessing observed data to determine the parameters (or other
+quantities related to parameters) of interest within our Data Generating
+Process (DGP). The parameter (or related quantity) we seek to estimate
+is commonly known as the <strong>estimand</strong>, representing the
 quantity of interest or the specific DGP parameter we aim to
 pinpoint.</p>
 <p>During the estimation phase, we use an <strong>estimator</strong>—a
