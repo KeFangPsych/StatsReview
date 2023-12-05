@@ -364,18 +364,28 @@ modelling</strong></h3>
 <p>In statistics, we commonly employ a theoretical framework known as a
 <strong>Data Generating Process (DGP)</strong> to model the generation
 of data. This DGP, defined by certain <strong>parameters</strong>,
-governs how data is generated probabilistically. For instance, when
-dealing with a single variable, we may assume that our data comprises
-independent observations drawn from an identical normal distribution,
-with the parameters of interest being the mean and variance of the
-distribution. Alternatively, we might describe one variable as a linear
-transformation of another variable with the addition of Gaussian noise.
-In this case, the parameters define both the relationship between the
-variables and the characteristics of the added noise.</p>
+governs how data is generated probabilistically (Note 1). For instance,
+when dealing with a single variable, we may assume that our data
+comprises independent observations drawn from an identical normal
+distribution, with the parameters of interest being the mean and
+variance of the distribution. Alternatively, we might describe one
+variable as a linear transformation of another variable with the
+addition of Gaussian noise. In this case, the parameters define both the
+relationship between the variables and the characteristics of the added
+noise.</p>
+<p><em>Note 1: Parameters of the DGP could be but are not necessarily
+the statistical characteristics of the DGP (such as expectation or
+variance), it should be more abstractly understood as variable
+quantitatives that define the process. For example, for a Poisson
+distribution, there is only one <span class="math inline">\(\lambda\)</span> parameter, which coincidentally
+also is the expectation and variance. And the uniform distribution is
+defined by its lower and upper bounds, which are not direct statistical
+measures of central tendency or spread.</em></p>
 <p>The primary objective in statistics involves several key steps:
-first, specifying a plausible DGP; second, estimating the parameters
+first, specifying a plausible DGP; second, estimating the parameters or
+other quantities of interest (e.g., statistical characteritics)
 associated with this DGP from data; third, probabilistic statements or
-hypotheses about the population based on the sample data; and finally,
+hypotheses about the DGP based on the sample data; and finally,
 assessing the adequacy of our assumed DGP and identifying any potential
 model shortcomings or violations. Additionally, when we have multiple
 possible DGPs to consider, we can compare them to determine the “best”
@@ -385,20 +395,27 @@ specification</strong>, <strong>parameter estimation</strong>,
 diagnosis</strong>, and <strong>model comparison</strong>.</p>
 <p><strong>Model specification</strong>, often referred to as specifying
 the Data Generating Process (DGP), is a ” art and science” process that
-heavily depends on your prior knowledge about the underlying process and
-the data you have on hand as constraints. For instance, if you are
-investigating the relationship between height and the biological sex of
-individuals, prior knowledge suggests that these two variables are
-related. Therefore, you might choose to model height as a function of
-sex with some added noise to account for variability. However, it’s
-essential to consider the data you have at your disposal. If your
-dataset only includes the height variable and lacks information on sex
-or any other relevant factors, then attempting to model the data with
-this DGP may not be suitable or informative. Furthermore, once we have
-gone through the process of estimation and inference, we may evaluate
-the adequacy of our initially assumed DGP through model diagnosis. If
-the model appears to be inadequate in explaining the observed data, we
-can refine or select a different DGP and repeat the process.</p>
+heavily depends on your prior knowledge about the underlying process,
+the specificity of DGP you are willing to make, and the data you have on
+hand as constraints. For instance, if you are investigating the
+relationship between height and the biological sex of individuals, prior
+knowledge suggests that these two variables are related. Therefore, you
+might choose to model height as a function of sex with some added noise
+to account for variability. Another factor often considered is the
+specificty of the DGP. In some cases, if you are less willing to make
+assumptions, you might choose to roughly define you DGP (e.g., simply
+assume the heights are independently drawn from a distribution with
+finite expectation and variance), or more specifically define it (e.g.,
+drawn from a normal distribution). This could have significant influence
+on the later estimation and inference processes. However, it’s essential
+to consider the data you have at your disposal. If your dataset only
+includes the height variable and lacks information on sex or any other
+relevant factors, then attempting to model the data with this DGP may
+not be suitable or informative. Furthermore, once we have gone through
+the process of estimation and inference, we may evaluate the adequacy of
+our initially assumed DGP through model diagnosis. If the model appears
+to be inadequate in explaining the observed data, we can refine or
+select a different DGP and repeat the process.</p>
 </div>
 <div id="ii.-estimation" class="section level3">
 <h3><strong>II. Estimation</strong></h3>
@@ -918,7 +935,7 @@ the Bessel’s correction.</p>
 \bar{X})^2}{n-1}\]</span></p>
 <p>The variance of the sample variance estimator is (the detailed proof
 can be found <a href="https://doi.org/10.1080/00031305.2014.966589">O’Neill,
-2014</a>:</p>
+2014</a>):</p>
 <p><span class="math display">\[
 \begin{align*}
 Var(S^2) &amp;= E\bigg[ \Big[S^2 - E(S^2) \Big]^2\bigg] \\
