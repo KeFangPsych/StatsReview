@@ -916,14 +916,16 @@ when the population expectation is unknown. The adjustment is known as
 the Bessel’s correction.</p>
 <p><span class="math display">\[S^2  = \frac{\sum (X_i -
 \bar{X})^2}{n-1}\]</span></p>
-<p>The variance of the sample variance estimator is:</p>
+<p>The variance of the sample variance estimator is (the detailed proof
+can be found <a href="https://doi.org/10.1080/00031305.2014.966589">O’Neill,
+2014</a>:</p>
 <p><span class="math display">\[
 \begin{align*}
 Var(S^2) &amp;= E\bigg[ \Big[S^2 - E(S^2) \Big]^2\bigg] \\
 &amp;= \bigg(\kappa - \frac{n-3}{n-1} \bigg) \frac{\sigma^4}{n}\\
 \\
-\kappa =&amp; E \left[ \left(\frac{X - \mu}{\sigma} \right)^4 \right] =
-\frac{E [(X_i - \mu)^4]}{\sigma^4}
+\text{with }\ \kappa =&amp; E \left[ \left(\frac{X - \mu}{\sigma}
+\right)^4 \right] = \frac{E [(X_i - \mu)^4]}{\sigma^4}
 \end{align*}
 \]</span></p>
 <p><span class="math inline">\(\kappa\)</span> is the kurtosis of the
