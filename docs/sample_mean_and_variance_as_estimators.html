@@ -571,7 +571,7 @@ if:</p>
 <p><span class="math display">\[\text{MSE}(\hat{\theta}) \leq
 \text{MSE}(\tilde{\theta})\]</span></p>
 <p>The lowest possible variance and MSE, is also provided by the
-generalized form of the Cramér-Rao Lower Bound (BRLB) such that:</p>
+generalized form of the Cramér-Rao Lower Bound (CRLB) such that:</p>
 <p><span class="math display">\[\text{Var}(\hat{\theta}) \geq {\frac
 {[1+{\frac{d\ Bias(\theta )}{d\theta}} ]^{2}}{I(\theta )}}\]</span>
 Noted that the key difference here is the <span class="math inline">\(\frac{d\ Bias(\theta )}{d\theta}\)</span> term,
@@ -693,14 +693,14 @@ of <span class="math inline">\(X\)</span> is defined as:</p>
 frequency in sample converge to the true probability (proved by the
 Glivenko-Cantelli Theorem).</p>
 <p>So it is intuitive to construct the sample moment as</p>
-<p><span class="math display">\[\bar{X^k} = \sum_{x^k_i \in X^k}
+<p><span class="math display">\[\bar{X}^k = \sum_{x^k_i \in X^k}
 \left[x^k_i \cdot \frac{n | X^k = x^k_i}{n} \right] = \frac{\sum
 x^k_i}{n}\]</span></p>
 <p>These estimators of the (raw) moments are unbiased for the
 corresponding population moments.</p>
 <p><span class="math display">\[
 \begin{align*}
-E(\bar{X^k}) =&amp; E(\frac{1}{n} \cdot \sum x^k_i) \\
+E(\bar{X}^k) =&amp; E(\frac{1}{n} \cdot \sum x^k_i) \\
 =&amp; \frac{1}{n} \cdot E(\sum x^k_i) \\
 =&amp; \frac{1}{n} \cdot \sum E(x^k_i) \\
 \text{As } x_i &amp;\text{ are } i.i.d\\
