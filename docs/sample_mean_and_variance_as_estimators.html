@@ -473,7 +473,8 @@ estimators, let’s consider an estimator <span class="math inline">\(\hat{\thet
 <p>An estimator is said to be unbiased if the expected value of the
 estimator equals the true parameter value.</p>
 <p>Specifically, the <strong>bias</strong> of an estimator is the
-difference between its expected value and the true parameter value.</p>
+expected difference between estimated value and the true parameter
+value.</p>
 <p><span class="math display">\[\text{Bias}(\hat{\theta}) =
 E(\hat{\theta} -\theta) = E(\hat{\theta}) - \theta\]</span></p>
 <p>An estimator is said to be unbiased if its bias equals zero, which
@@ -628,15 +629,15 @@ the BLUE if and only if:</p>
 \tilde{\theta} = X \cdot \vec{a}\ \ \text{and }\ E(\hat{\theta}) =
 \theta,\\ \text{Var}(\hat{\theta}) \leq
 \text{Var}(\tilde{\theta})\]</span> However, it is worth noting that,
-although BLUEs is bounded by the Cramér-Rao Lower Bound (CRLB), the
+although BLUEs are bounded by the Cramér-Rao Lower Bound (CRLB), the
 BLUEs may not reach it even if other unbiased non-linear estimators may
 have lower variances or do reach CRLM.</p>
+<p>So BLUE is often proved in other ways (see OLS and Gaussian-Markov
+notes).</p>
 <p>Of course, if the variance of a linear unbiased estimator actually
 reach the CRLB, it would be a BLUE as there is no smaller variance can
 be reached among all unbiased estimators (including linearly unbiased
 ones).</p>
-<p>So BLUE is often proved in other ways (see OLS and Gaussian-Markov
-notes).</p>
 </div>
 <div id="asymptotic-normality" class="section level4">
 <h4>5. <strong>Asymptotic Normality</strong></h4>
